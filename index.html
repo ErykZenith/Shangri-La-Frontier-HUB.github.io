@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/index.css">
+    <script src="./js/vue/index.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="updateHp(-10)">damage</button>
+        <button @click="updateHp(10)">heal</button>
+        <div class="container" style="background: #111;">
+            <div class="main">
+                <svg width="10rem" viewBox="0 0 250 250" class="circular-progress-bar">
+                    <circle class="background-layer"></circle>
+                    <circle class="mid-layer"></circle>
+                    <circle class="top-layer"></circle>
+                    <circle class="progress-state" :style="`
+                        --progress-value:${stateProgress}
+                    `"></circle>
+                    <circle class="progress-hp" :style="`--progress-value:${hp}`"></circle>
+                </svg>
+                
+                <div class="character-status">
+                    <div style="display: flex;gap: .5rem;margin-left: 2.8rem;">
+                        <div class="character-name">サンラク</div>
+                        <div class="character-level"><span>LV:</span>99 <span>Extend</span></div>
+                    </div>
+                    
+                    <div class="status-bars">
+                        <div class="status-hp">
+                            HP <div class="status-value">80/80</div>
+                        </div>
+                        <div style="display: flex;gap: .5rem;">
+                            <div class="resource-bar">
+                                <p>MP</p>
+                                <div class="bar-container">
+                                    <div class="bar-progress"
+                                    :style="`--progress-value:${mp}%`"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="resource-bar">
+                                <p>Stamina</p>
+                                <div class="bar-container">
+                                    <div class="bar-progress"
+                                    :style="`--progress-value:${stamina}%`"
+                                    ></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./js/main.js"></script>
+</body>
+
+</html>

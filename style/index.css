@@ -1,0 +1,176 @@
+@font-face {
+  font-family: "MPLUSRounded1c";
+  src: url(../font/MPLUSRounded1c-Black.ttf);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5vh;
+  user-select: none;
+  font-family: "MPLUSRounded1c";
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+*:root {
+  --color-bg: #3B5A6D;
+  --color-bg1: #DAE7F9;
+  --color-progress: #18C77A;
+}
+
+.main {
+  position: relative;
+  display: flex;
+  margin-left: 5rem;
+
+  .circular-progress-bar {
+    position: absolute;
+    left: -3.5rem;
+    margin-top: 1rem;
+    --progress: 50;
+    --size: 100%;
+    --half-size: calc(var(--size) / 2);
+    --stroke-width: 50px;
+    --radius: calc((var(--size) - var(--stroke-width)) / 2);
+    --circumference: calc(var(--radius) * pi * 2);
+    --dash: calc((var(--progress) * var(--circumference)) / 100);
+    transform: rotate(-10deg)skewX(-20deg);
+
+    circle {
+      cx: var(--half-size);
+      cy: var(--half-size);
+      r: var(--radius);
+      stroke-width: var(--stroke-width);
+      fill: none;
+    }
+
+    .background-layer {
+      transform: rotate(90deg);
+      transform-origin: var(--half-size) var(--half-size);
+      stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+      stroke: var(--color-bg);
+    }
+
+    .mid-layer {
+      --stroke-width: 43px;
+      --progress: 49;
+      --dash: calc((var(--progress) * var(--circumference)) / 100);
+      transform: rotate(92deg);
+      transform-origin: var(--half-size) var(--half-size);
+      stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+      stroke: var(--color-bg1);
+    }
+
+    .top-layer {
+      --stroke-width: 30px;
+      --progress: 48;
+      --dash: calc((var(--progress) * var(--circumference)) / 100);
+      transform: rotate(94deg);
+      transform-origin: var(--half-size) var(--half-size);
+      stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+      transition: stroke-dasharray .3s;
+      stroke: #3E5862;
+    }
+
+    .progress-state {
+      --stroke-width: 30px;
+      --progress: calc(var(--progress-value) / 100 * 48);
+      --dash: calc((var(--progress) * var(--circumference)) / 100);
+      transform: rotate(94deg);
+      transform-origin: var(--half-size) var(--half-size);
+      stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+      transition: stroke-dasharray .3s;
+      stroke: #f05a5a;
+    }
+
+    .progress-hp {
+      --stroke-width: 30px;
+      --progress: calc(var(--progress-value) / 100 * 48);
+      --dash: calc((var(--progress) * var(--circumference)) / 100);
+      transform: rotate(94deg);
+      transform-origin: var(--half-size) var(--half-size);
+      stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+      transition: stroke-dasharray .3s;
+      stroke: var(--color-progress);
+    }
+  }
+
+  .character-status {
+    .character-name {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #0D6D99;
+      -webkit-text-stroke: .1rem #ffffff;
+    }
+
+    .character-level {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #046694;
+      -webkit-text-stroke: .1rem #63D2F9;
+
+      span {
+        letter-spacing: .15rem;
+        font-size: 1.4rem;
+      }
+    }
+
+    .status-bars {
+      margin-left: 1rem;
+
+      .status-hp {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2.3rem;
+        align-items: end;
+        font-size: 3rem;
+        font-weight: bold;
+        color: #75E2FF;
+        -webkit-text-stroke: .1rem var(--color-bg);
+
+        .status-value {
+          font-size: 3.4rem;
+          color: #D8E4F4;
+        }
+      }
+
+      .resource-bar {
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+
+        p {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #75E2FF;
+          -webkit-text-stroke: .1rem var(--color-bg);
+        }
+
+        .bar-container {
+          overflow: hidden;
+          width: 8rem;
+          height: .8rem;
+          border-radius: 1rem;
+          background: #3E5862;
+          box-shadow: var(--color-bg1) 0 0 0 .15rem, var(--color-bg) 0 0 0 .25rem;
+
+          .bar-progress {
+            width: var(--progress-value);
+            height: 100%;
+            background: #18C77A;
+            transition: .3s;
+          }
+        }
+      }
+    }
+
+  }
+}
